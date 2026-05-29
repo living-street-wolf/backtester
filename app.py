@@ -4,6 +4,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 
+
 from datetime import timedelta
 
 # =========================================
@@ -136,7 +137,10 @@ def load_data(symbol, period):
     df = df.dropna()
 
     return df
+df = yf.download(symbol, period=period, interval="1m")
 
+df.columns = [c[0] if isinstance(c, tuple) else c for c in df.columns]
+df = df.dropna()
 
 # =========================================
 # INDICATORS
